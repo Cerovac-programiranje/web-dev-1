@@ -1,0 +1,25 @@
+div {
+  height: 40px;
+  background-color: red;
+}
+
+#drugi-div {
+  color: green;
+  background-color: aqua;
+  font-weight: 600;
+}
+
+btn {
+  height: 35px;
+  border-radius: 20px;
+  background-color: blueviolet;
+}
+
+#btn2 {
+  border: 2px solid burlywood;
+  background-color: cadetblue;
+}
+
+.plava-slova {
+  color: blue;
+}
