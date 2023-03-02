@@ -36,3 +36,23 @@ function ucitana_stranica() {
     document.getElementById("btn2").style.backgroundColor = novaBoja;
   };
 }
+
+function brisi() {
+  const element = document.getElementById("btn2");
+
+  // element se brise iz HTML, ne mozemo ga vratiti
+  // element.remove();
+
+  // element onstane u HTML ali ne zauzima prostor
+  element.style.display = "none";
+
+  // element nije prikazan, ali zauzima prostor (ostane rupa)
+  // element.style.visibility = "hidden";
+}
+
+function pisi() {
+  const element = document.getElementById("btn2");
+
+  element.style.display = "inline-block";
+  // element.style.visibility = "visible";
+}
