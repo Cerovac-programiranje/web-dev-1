@@ -95,8 +95,9 @@ function pokreni_simulaciju() {
   // probajte sa 10 ili sa 30
   const fps = 15;
   // brzina kretanja kruga (pixel/second)
-  // moramo podijeliti sa fps da bismo dobili brzinu po osvjezavanju
-  const brzina = 50 / fps;
+  const brzina = 50;
+  // moramo podijeliti brzinu sa fps da bismo dobili promjenu pozicije u pixel/frame-u
+  const promjenaPoOsvjezenju = brzina / fps;
 
   // pocetne pozicije x, y
   let x = 0; // koristimo "let" jer cemo da mijenjamo ovu vrijednost
@@ -107,8 +108,9 @@ function pokreni_simulaciju() {
   zaustavi_simulaciju();
 
   function iscrtaj_na_novoj_poziciji() {
-    x += brzina;
-    y += brzina;
+    // naivan nacin, promjenimoi x i y za istu vrijednost da bismo se kretali po dijagonali
+    x += promjenaPoOsvjezenju;
+    y += promjenaPoOsvjezenju;
     // obrisi canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     nacrtaj_krug(ctx, x, y, radius);
