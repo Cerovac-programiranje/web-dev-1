@@ -128,3 +128,44 @@ function zaustavi_simulaciju() {
     clearInterval(interval);
   }
 }
+
+function iscrtaj_e() {
+  // nadji canvas element
+  const canvas = document.getElementById("kanvasGrafikon");
+  // uzmi kontekst za crtanje 2D
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const sirina_stuba = 30; // px
+  const razmak_stubova = 70; // px
+  const pocetna_pozicija = 20;
+
+  // koliko puta godisnje uzimamo kamatu,
+  // a kamata nam je 1/broj, npr brooj = 2 znaci da je kamata 1/2 = 0.5 = 50%
+  const broj_perioda = [1, 2, 3, 4, 12, 365, 10000];
+  for (var i = 0; i < broj_perioda.length; i++) {
+    const x_vrijednost = broj_perioda[i];
+    // svaki korak nam se poveca glavnica za kamatu a to radimo x_vrijednost puta godisnje
+    // Math.pow funkcija je stepen
+    const y_vrijednost = Math.pow(1 + 1 / x_vrijednost, x_vrijednost);
+
+    // vrijednosti su od 2-2.718281..., tako da mnozimo sa 100 da bismo imali vrijednosti od 200-271
+    const visina_stubica = y_vrijednost * 100; // px
+
+    // pocevsi od pocetnog pomjerimo se za svaki sledeci
+    const x_pozicija = pocetna_pozicija + i * razmak_stubova;
+    // posto Y koordinata ide na dole, moramo poceti iznad dna
+    const y_pozicija = canvas.height - visina_stubica;
+
+    // zapocni crtanje
+    ctx.beginPath();
+    ctx.fillStyle = napravi_nasumicnu_boju(); // oboji nasumicno
+    ctx.fillRect(x_pozicija, y_pozicija, sirina_stuba, visina_stubica);
+
+    ctx.strokeText(
+      `${x_vrijednost} - ${y_vrijednost.toFixed(4)}`,
+      x_pozicija - sirina_stuba / 2, // malo pomjerimo u lijevo od stubica
+      y_pozicija - 10 // malo iznad stubica
+    );
+  }
+}
